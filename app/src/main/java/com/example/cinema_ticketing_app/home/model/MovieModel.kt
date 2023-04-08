@@ -1,4 +1,4 @@
-package com.example.cinema_ticketing_app.module.home.model
+package com.example.cinema_ticketing_app.home.model
 
 import com.example.cinema_ticketing_app.R
 
@@ -18,7 +18,7 @@ data class MovieModel(
 val nowPlayingMovie = listOf(
     MovieModel(
         id= "1",
-        title = "Minions: The Rise of Gru",
+        title = "Nope",
         assetImage = R.drawable.jurassic,
         type = "Action",
         duration = "1h 27m",
@@ -28,7 +28,7 @@ val nowPlayingMovie = listOf(
     ),
     MovieModel(
         id= "2",
-        title = "Thor: Love and Thunder",
+        title = "Nope",
         assetImage = R.drawable.jurassic,
         type = "Action",
         duration = "1h 59m",
@@ -38,7 +38,7 @@ val nowPlayingMovie = listOf(
     ),
     MovieModel(
         id= "3",
-        title = "Jurassic World Dominion",
+        title = "Nope",
         assetImage = R.drawable.jurassic,
         type = "Action",
         duration = "2h 29m",
@@ -51,7 +51,7 @@ val nowPlayingMovie = listOf(
 val upcoming = listOf(
     MovieModel(
         id= "4",
-        title = "DC League of Super-Pets",
+        title = "Nope",
         assetImage = R.drawable.jurassic,
         type = "Animation",
         duration = "1h 46m",
@@ -71,7 +71,7 @@ val upcoming = listOf(
     ),
     MovieModel(
         id= "6",
-        title = "Thirteen Lives",
+        title = "Nope",
         assetImage = R.drawable.jurassic,
         type = "Drama",
         duration = "1h 46m",
