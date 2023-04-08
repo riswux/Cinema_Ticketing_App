@@ -1,4 +1,4 @@
-package com.example.cinema_ticketing_app.module.home.presentation
+package com.example.cinema_ticketing_app.home.presentation
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
