@@ -1,14 +1,12 @@
 package com.example.cinema_ticketing_app.home.presentation
 
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,8 +19,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.cinema_ticketing_app.R
 import com.example.cinema_ticketing_app.core.route.AppRouteName
 import com.example.cinema_ticketing_app.core.theme.BlueVariant
+import com.example.cinema_ticketing_app.core.theme.Gray
 import com.example.cinema_ticketing_app.core.theme.Yellow
 import com.example.cinema_ticketing_app.home.model.MovieModel
 import com.example.cinema_ticketing_app.home.model.nowPlayingMovie
@@ -30,6 +30,8 @@ import com.example.cinema_ticketing_app.home.model.upcoming
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
+import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.delay
 import kotlin.math.absoluteValue
 
 @Composable
@@ -60,7 +62,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(horizontal = 24.dp)
             )
             Spacer(modifier = Modifier.height(24.dp))
-            //Banners()
+            Banners()
             Spacer(modifier = Modifier.height(16.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -230,5 +232,74 @@ fun NowPlayingMovie(
     }
 }
 
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun Banners() {
+    val banners = listOf(
+        R.drawable.banner_1,
+        R.drawable.banner_2,
+        R.drawable.banner_3,
+    )
 
+    val pagerState = rememberPagerState()
+    val bannerIndex = remember { mutableStateOf(0) }
+
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPage }.collect { page ->
+            bannerIndex.value = page
+        }
+    }
+
+    /// auto scroll
+    LaunchedEffect(Unit) {
+        while (true) {
+            delay(10_000)
+            tween<Float>(1500)
+            pagerState.animateScrollToPage(
+                page = (pagerState.currentPage + 1) % pagerState.pageCount
+            )
+        }
+    }
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(190.dp)
+            .padding(horizontal = 24.dp)
+    ) {
+        HorizontalPager(
+            state = pagerState,
+            count = banners.size,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(190.dp)
+        ) { index ->
+            Image(
+                painter = painterResource(id = banners[index]),
+                contentDescription = "Banners",
+                contentScale = ContentScale.FillBounds,
+            )
+        }
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp)
+        ) {
+            repeat(banners.size) { index ->
+                val height = 12.dp
+                val width = if (index == bannerIndex.value) 28.dp else 12.dp
+                val color = if (index == bannerIndex.value) Yellow else Gray
+
+                Surface(
+                    modifier = Modifier
+                        .padding(end = 6.dp)
+                        .size(width, height)
+                        .clip(RoundedCornerShape(20.dp)),
+                    color = color,
+                ) {
+                }
+            }
+        }
+    }
+}
 
