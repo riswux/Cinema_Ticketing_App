@@ -80,7 +80,7 @@ fun HomeScreen(
                 }
             }
             Spacer(modifier = Modifier.height(4.dp))
-            //Categories()
+            Categories()
             Spacer(modifier = Modifier.height(16.dp))
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -231,6 +231,43 @@ fun NowPlayingMovie(
         }
     }
 }
+
+@Composable
+fun Categories() {
+    val categories = listOf(
+        "Animation",
+        "Horror",
+        "Action",
+        "Comedy",
+        "Romance",
+        "Sci-fi",
+        "History",
+        "Adventure",
+    )
+    val scrollState = rememberScrollState()
+
+    Row(
+        modifier = Modifier.horizontalScroll(scrollState)
+    ) {
+        repeat(categories.size) { index ->
+            Surface(
+                /// order matters
+                modifier = Modifier
+                    .padding(
+                        start = if (index == 0) 24.dp else 0.dp,
+                        end = 12.dp,
+                    )
+                    .border(width = 1.dp, color = Gray, shape = RoundedCornerShape(16.dp))
+                    .clip(RoundedCornerShape(16.dp))
+                    .clickable { }
+                    .padding(12.dp)
+            ) {
+                Text(text = categories[index], style = MaterialTheme.typography.caption)
+            }
+        }
+    }
+}
+
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
