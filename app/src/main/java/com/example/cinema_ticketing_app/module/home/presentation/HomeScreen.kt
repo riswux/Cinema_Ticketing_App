@@ -1,4 +1,4 @@
-package com.example.cinema_ticketing_app.home.presentation
+package com.example.cinema_ticketing_app.module.home.presentation
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*
@@ -24,9 +24,9 @@ import com.example.cinema_ticketing_app.core.route.AppRouteName
 import com.example.cinema_ticketing_app.core.theme.BlueVariant
 import com.example.cinema_ticketing_app.core.theme.Gray
 import com.example.cinema_ticketing_app.core.theme.Yellow
-import com.example.cinema_ticketing_app.home.model.MovieModel
-import com.example.cinema_ticketing_app.home.model.nowPlayingMovie
-import com.example.cinema_ticketing_app.home.model.upcoming
+import com.example.cinema_ticketing_app.module.home.model.MovieModel
+import com.example.cinema_ticketing_app.module.home.model.nowPlayingMovie
+import com.example.cinema_ticketing_app.module.home.model.upcoming
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -99,7 +99,7 @@ fun HomeScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
             NowPlayingMovie { movie ->
-                //navController.navigate("${AppRouteName.Detail}/${movie.id}")
+                navController.navigate("${AppRouteName.Detail}/${movie.id}")
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
