@@ -1,4 +1,4 @@
-package com.example.cinema_ticketing_app.module.detail.presentation
+package com.example.cinema_ticketing_app.module.presentation
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.*

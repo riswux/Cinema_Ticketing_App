@@ -1,4 +1,4 @@
-package com.example.cinema_ticketing_app.home.presentation
+package com.example.cinema_ticketing_app.module.home.presentation
 
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.*

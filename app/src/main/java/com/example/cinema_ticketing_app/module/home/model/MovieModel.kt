@@ -1,4 +1,4 @@
-package com.example.cinema_ticketing_app.home.model
+package com.example.cinema_ticketing_app.module.home.model
 
 import com.example.cinema_ticketing_app.R
 
