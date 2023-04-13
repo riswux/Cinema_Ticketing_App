@@ -1,10 +1,8 @@
 package com.example.cinema_ticketing_app.module.seat_selector.presentation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -23,6 +21,8 @@ import com.example.cinema_ticketing_app.core.theme.Gray
 import com.example.cinema_ticketing_app.core.theme.LightGray
 import com.example.cinema_ticketing_app.core.theme.Yellow
 import java.time.LocalDate
+import java.time.format.TextStyle
+import java.util.*
 
 @Composable
 fun SeatSelectorScreen(
@@ -132,9 +132,161 @@ fun SeatSelectorScreen(
                     style = MaterialTheme.typography.caption,
                 )
             }
+            Spacer(modifier = Modifier.height(24.dp))
+            Surface(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth(),
+                color = Color.White,
+                shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    Text(
+                        text = "Select Seat",
+                        style = MaterialTheme.typography.subtitle1,
+                    )
+                    Row(
+                        modifier = Modifier.horizontalScroll(dateScrollState),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        for (i in 0..14) {
+                            val date = today.plusDays(i.toLong())
+                            DateComp(
+                                date = date, isSelected = selectedDate.value == date
+                            ) {
+                                selectedDate.value = it
+                            }
+                        }
+                    }
+                    Row(
+                        modifier = Modifier.horizontalScroll(timeScrollState),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        for (i in 10..22 step 2) {
+                            val time = "$i:00"
+                            TimeComp(
+                                time = time, isSelected = selectedTime.value == time
+                            ) {
+                                selectedTime.value = it
+                            }
+                        }
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Text(
+                                text = "Total Price",
+                                style = MaterialTheme.typography.subtitle1,
+                            )
+                            Text(
+                                text = "\$${selectedSeat.size * 10}",
+                                style = MaterialTheme.typography.subtitle1,
+                            )
+                        }
+
+                        Button(
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .height(56.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = Yellow,
+                            ),
+                            shape = RoundedCornerShape(32.dp),
+                            onClick = {},
+                        ) {
+                            Text("Continue")
+                        }
+                    }
+                }
+            }
+
         }
     }
 }
+@Composable
+fun TimeComp(
+    time: String,
+    isSelected: Boolean = false,
+    onClick: (String) -> Unit = {},
+) {
+    val color = when {
+        isSelected -> Yellow
+        else -> Yellow.copy(alpha = 0.15f)
+    }
+    Surface(
+        modifier = Modifier
+            .wrapContentSize()
+            .clip(RoundedCornerShape(16.dp))
+            .clickable {
+                onClick(time)
+            }, shape = RoundedCornerShape(16.dp), color = color
+    ) {
+        Text(
+            text = time,
+            style = MaterialTheme.typography.caption,
+            modifier = Modifier.padding(12.dp),
+        )
+    }
+}
+@Composable
+fun DateComp(
+    date: LocalDate,
+    isSelected: Boolean = false,
+    onClick: (LocalDate) -> Unit = {},
+) {
+    val color = when {
+        isSelected -> Yellow
+        else -> Yellow.copy(alpha = 0.15f)
+    }
+    val textBg = when {
+        isSelected -> Color.White
+        else -> Color.Transparent
+    }
+    Surface(
+        modifier = Modifier
+            .wrapContentSize()
+            .clip(RoundedCornerShape(16.dp))
+            .clickable {
+                onClick(date)
+            }, shape = RoundedCornerShape(16.dp), color = color
+    ) {
+        Column(
+            modifier = Modifier.padding(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = date.month.getDisplayName(TextStyle.SHORT, Locale.getDefault()),
+                style = MaterialTheme.typography.caption
+            )
+            Box(
+                modifier = Modifier
+                    .clip(CircleShape)
+                    .background(textBg)
+
+                    .padding(4.dp),
+            ) {
+                Text(
+                    text = date.dayOfMonth.toString(),
+                    style = MaterialTheme.typography.caption,
+                )
+            }
+        }
+    }
+}
+
+
 @Composable
 fun SeatComp(
     isEnabled: Boolean = false,
