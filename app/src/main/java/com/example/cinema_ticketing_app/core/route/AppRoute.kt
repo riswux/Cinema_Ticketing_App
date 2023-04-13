@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.example.cinema_ticketing_app.module.detail.presentation.DetailScreen
 import com.example.cinema_ticketing_app.module.home.model.nowPlayingMovie
 import com.example.cinema_ticketing_app.module.home.presentation.HomeScreen
+import com.example.cinema_ticketing_app.module.seat_selector.presentation.SeatSelectorScreen
 
 object AppRoute {
     @Composable
@@ -23,6 +24,9 @@ object AppRoute {
                 val movie = nowPlayingMovie.first{ it.id == id }
 
                 DetailScreen(navController = navController, movie)
+            }
+            composable(AppRouteName.SeatSelector) {
+                SeatSelectorScreen(navController = navController)
             }
         }
     }

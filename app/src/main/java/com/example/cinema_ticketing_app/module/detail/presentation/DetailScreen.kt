@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.cinema_ticketing_app.R
+import com.example.cinema_ticketing_app.core.route.AppRouteName
 import com.example.cinema_ticketing_app.core.theme.Gray
 import com.example.cinema_ticketing_app.core.theme.Yellow
 import com.example.cinema_ticketing_app.module.home.model.MovieModel
@@ -39,7 +40,7 @@ fun DetailScreen(
                 ),
                 shape = RoundedCornerShape(32.dp),
                 onClick = {
-                    //navController.navigate(AppRouteName.SeatSelector)
+                    navController.navigate(AppRouteName.SeatSelector)
                 },
             ) {
                 Text(text = "Booking Now")
