@@ -19,7 +19,7 @@ val nowPlayingMovie = listOf(
     MovieModel(
         id= "1",
         title = "Minions: The Rise of Gru",
-        assetImage = R.drawable.jurassic,
+        assetImage = R.drawable.minion,
         type = "Action",
         duration = "1h 27m",
         rating = "7.7/10",
@@ -29,7 +29,7 @@ val nowPlayingMovie = listOf(
     MovieModel(
         id= "2",
         title = "Thor: Love and Thunder",
-        assetImage = R.drawable.jurassic,
+        assetImage = R.drawable.thor,
         type = "Action",
         duration = "1h 59m",
         rating = "7.0/10",
@@ -52,7 +52,7 @@ val upcoming = listOf(
     MovieModel(
         id= "4",
         title = "DC League of Super-Pets",
-        assetImage = R.drawable.jurassic,
+        assetImage = R.drawable.super_pets,
         type = "Animation",
         duration = "1h 46m",
         rating = "N/A",
@@ -62,7 +62,7 @@ val upcoming = listOf(
     MovieModel(
         id= "5",
         title = "Nope",
-        assetImage = R.drawable.jurassic,
+        assetImage = R.drawable.nope,
         type = "Science Fiction",
         duration = "2h 11m",
         rating = "N/A",
@@ -72,7 +72,7 @@ val upcoming = listOf(
     MovieModel(
         id= "6",
         title = "Thirteen Lives",
-        assetImage = R.drawable.jurassic,
+        assetImage = R.drawable.lives,
         type = "Drama",
         duration = "1h 46m",
         rating = "N/A",
